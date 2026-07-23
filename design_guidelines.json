@@ -1,0 +1,161 @@
+{
+  "theme": {
+    "mode": "light",
+    "name": "Editorial Warmth & Swiss Precision",
+    "description": "An architectural, high-end editorial approach. Moving away from generic SaaS real estate (Zillow clones) into a premium, 'Architectural Digest' aesthetic. Relies on negative space, deep organic colors, and sharp typography."
+  },
+  "typography": {
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap",
+    "font_families": {
+      "sans": "'Outfit', sans-serif",
+      "serif": "'Cormorant Garamond', serif"
+    },
+    "hierarchy": {
+      "h1": "font-serif text-5xl sm:text-6xl lg:text-7xl tracking-tighter leading-none font-light",
+      "h2": "font-serif text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight",
+      "h3": "font-sans text-xl sm:text-2xl font-medium tracking-tight",
+      "body": "font-sans text-base leading-relaxed text-stone-600",
+      "overline": "font-sans text-xs uppercase tracking-[0.2em] font-semibold text-stone-500",
+      "caption": "font-sans text-sm text-stone-500"
+    }
+  },
+  "colors": {
+    "background": {
+      "default": "#F7F5F0",
+      "paper": "#FFFFFF",
+      "dark": "#1A1C19"
+    },
+    "text": {
+      "primary": "#1E1E1E",
+      "secondary": "#6B6A68",
+      "inverse": "#FFFFFF"
+    },
+    "primary": {
+      "DEFAULT": "#2C3D30",
+      "hover": "#3A4F3E",
+      "foreground": "#FFFFFF"
+    },
+    "accent": {
+      "DEFAULT": "#C86A53",
+      "hover": "#D87A63",
+      "foreground": "#FFFFFF"
+    },
+    "border": {
+      "DEFAULT": "#E5E5E5",
+      "focus": "#2C3D30"
+    }
+  },
+  "spacing_and_layout": {
+    "container": "max-w-7xl mx-auto px-6 lg:px-8",
+    "section_padding": "py-24 md:py-32",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8",
+    "card_padding": "p-6 sm:p-8"
+  },
+  "visual_enhancers": {
+    "borders": "border border-stone-200",
+    "radius": "rounded-none sm:rounded-sm",
+    "shadows": {
+      "card_hover": "shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]",
+      "glass": "shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+    },
+    "surfaces": {
+      "glass_header": "bg-white/80 backdrop-blur-xl border-b border-stone-200",
+      "card": "bg-white border border-stone-200 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300"
+    }
+  },
+  "components": {
+    "button": {
+      "primary": "inline-flex items-center justify-center bg-[#2C3D30] text-white px-8 py-4 font-sans font-medium tracking-wide hover:bg-[#3A4F3E] transition-colors rounded-sm",
+      "secondary": "inline-flex items-center justify-center border border-[#1E1E1E] text-[#1E1E1E] px-8 py-4 font-sans font-medium tracking-wide hover:bg-stone-100 transition-colors rounded-sm",
+      "ghost": "inline-flex items-center justify-center text-[#1E1E1E] hover:text-[#C86A53] transition-colors font-medium"
+    },
+    "role_toggle": {
+      "description": "Segmented control for Admin/User signup/signin.",
+      "container": "flex p-1 bg-stone-100 rounded-sm w-full max-w-sm mx-auto",
+      "button": "flex-1 py-2 text-sm font-medium text-center transition-all relative z-10",
+      "active_indicator": "absolute inset-0 bg-white shadow-sm rounded-[2px] z-0"
+    },
+    "property_card": {
+      "wrapper": "group relative flex flex-col bg-white border border-stone-200 overflow-hidden",
+      "image_container": "relative aspect-[4/3] sm:aspect-[3/4] overflow-hidden",
+      "image": "w-full h-full object-cover transition-transform duration-700 group-hover:scale-105",
+      "content": "p-6 flex flex-col gap-2",
+      "price": "font-serif text-2xl text-[#1E1E1E]",
+      "title": "font-sans font-medium text-lg text-[#1E1E1E] truncate",
+      "meta": "flex items-center gap-4 text-sm text-stone-500 font-sans mt-2"
+    },
+    "inputs": {
+      "default": "w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-sm focus:outline-none focus:ring-0 focus:border-[#2C3D30] focus:bg-white transition-colors placeholder:text-stone-400 font-sans"
+    }
+  },
+  "motion": {
+    "page_transition": {
+      "initial": { "opacity": 0, "y": 10 },
+      "animate": { "opacity": 1, "y": 0 },
+      "exit": { "opacity": 0, "y": -10 },
+      "transition": { "duration": 0.4, "ease": [0.22, 1, 0.36, 1] }
+    },
+    "stagger_children": {
+      "container": { "hidden": { "opacity": 0 }, "show": { "opacity": 1, "transition": { "staggerChildren": 0.1 } } },
+      "item": { "hidden": { "opacity": 0, "y": 20 }, "show": { "opacity": 1, "y": 0, "transition": { "duration": 0.5, "ease": "easeOut" } } }
+    },
+    "libraries": [
+      "framer-motion (for layout transitions, staggering, layoutId for role toggles)",
+      "lenis (for smooth scrolling momentum)"
+    ]
+  },
+  "image_urls": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsdXh1cnklMjBob3VzZSUyMGV4dGVyaW9yJTIwc3Vuc2V0fGVufDB8fHx8MTc4NDgzMzgyNXww&ixlib=rb-4.1.0&q=85",
+      "alt": "Modern luxury house at golden hour with water pool",
+      "placement": "Landing Page Hero background or split-screen Auth left side."
+    },
+    "property_exterior_1": {
+      "url": "https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Elegant suburban home",
+      "placement": "Featured Listings or Property Grid."
+    },
+    "property_interior_1": {
+      "url": "https://images.unsplash.com/photo-1724582586529-62622e50c0b3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxtaW5pbWFsaXN0JTIwbHV4dXJ5JTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yfGVufDB8fHx8MTc4NDgzMzgyNXww&ixlib=rb-4.1.0&q=85",
+      "alt": "Minimalist luxury living room",
+      "placement": "Property Details Page Gallery or Featured Listings."
+    },
+    "property_interior_2": {
+      "url": "https://images.pexels.com/photos/13722886/pexels-photo-13722886.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Sleek modern living room with dark tones",
+      "placement": "Property Details Page Gallery."
+    },
+    "agent_or_lifestyle": {
+      "url": "https://images.pexels.com/photos/8815820/pexels-photo-8815820.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Realtor conducting tour",
+      "placement": "About Section or Inquiry Form context image."
+    }
+  },
+  "iconography": {
+    "library": "lucide-react",
+    "style": "Minimalist, stroke-width 1.5, avoiding heavily filled icons.",
+    "instructions": "Use lucide-react. Do NOT use emojis for UI icons."
+  },
+  "specific_page_instructions": {
+    "landing_page": "Use massive Typography (Cormorant) for the H1. The hero should not just be a dark overlay on an image. Consider an asymmetrical bento grid layout where the text takes up the left 5 columns on a #F7F5F0 background, and the hero image takes up the right 7 columns, spanning full height. Use Lenis for smooth scroll.",
+    "listings_page": "Implement a sticky sidebar for filters (Price, Beds, Baths, Type). The right side should be a CSS Grid of property cards. Animate cards in on scroll using framer-motion stagger.",
+    "property_details": "Hero section should be an immersive masonry gallery of images. Followed by a 2-column layout: Left column (7 cols) for Description & Amenities, Right column (5 cols) sticky card for Price & Inquiry form.",
+    "auth_page": "Split screen layout. Left side: immersive architectural photo (Hero image). Right side: Form. For the Admin/User switch, use a custom segmented control component with Framer Motion `layoutId` for the sliding pill effect. Store the active tab state explicitly.",
+    "dashboards": "Admin: High density, purely functional. Sidebar navigation (Dark Forest Green). Use Shadcn tables for listing management. User Dashboard: Focus on 'Saved Favorites' (Grid of cards) and 'Inquiries' (List view)."
+  },
+  "accessibility": {
+    "contrast": "Ensure white text on the #2C3D30 Primary background has sufficient contrast. The #1E1E1E text on #F7F5F0 is highly legible.",
+    "motion": "Wrap Framer Motion animations with a useReducedMotion check where necessary, or keep transitions subtle.",
+    "testing": "All interactive elements (buttons, toggles, form inputs, property cards) MUST have semantic `data-testid` attributes."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You MUST use JavaScript (.js/.jsx) instead of TypeScript.",
+    "Do NOT use centered text-align globally. Only center headings when intentionally symmetric.",
+    "Do NOT use purple/violet gradients or 'AI slop' aesthetics. Stick to the Warm Brutalism palette defined here.",
+    "Ensure the header navigation is solid or glassmorphic (bg-white/80 + backdrop-blur) to prevent text collision over scrolling content.",
+    "Add 'data-testid' to ALL actionable UI pieces for testing.",
+    "Avoid Shadcn 'Card' wrapper for marketing pages if it forces rigid styles; use raw divs with the defined visual_enhancers for absolute control.",
+    "Implement Sonner for toast notifications (e.g., 'Inquiry Sent', 'Listing Added').",
+    "Images MUST NOT rely on placeholder services. Use the exact URLs provided in the `image_urls` section."
+  ]
+}
