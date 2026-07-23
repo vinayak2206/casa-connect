@@ -1,0 +1,28 @@
+{
+  "summary": "Verified hero search form overflow fix on Landing page across 6 viewports (1920, 1440, 1280, 1024, 768, 375). Form no longer overflows its parent (lg:col-span-5); Explore button, city select, and search input all fit inside the form. Regression: submitting form navigates to /listings?q=ocean correctly. No horizontal scrollbar at any tested breakpoint.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Landing hero @ 1024px (lg breakpoint)", "issues": ["Search input becomes very narrow (~43px visible width) because form width is 372px while select (133px) + button (113px) + gaps/padding consume most space. Still functional and not clipped, but placeholder text is largely hidden. Consider reducing select max-width or hiding icon/select on md-lg range."]}
+    ]
+  },
+  "measurements": {
+    "1920": {"form_width": 478.66, "form_overflows_parent": false, "btn_overflows_form": false, "horizontal_scroll": false},
+    "1440": {"form_width": 478.66, "form_overflows_parent": false, "btn_overflows_form": false, "horizontal_scroll": false},
+    "1280": {"form_width": 478.66, "form_overflows_parent": false, "btn_overflows_form": false, "horizontal_scroll": false},
+    "1024": {"form_width": 372, "form_overflows_parent": false, "btn_overflows_form": false, "horizontal_scroll": false, "note": "input squeezed to 43px"},
+    "768":  {"form_width": 720, "form_overflows_parent": false, "btn_overflows_form": false, "horizontal_scroll": false},
+    "375":  {"form_width": 327, "stacked_flex_col": true, "all_children_visible": true, "horizontal_scroll": false}
+  },
+  "regression_test": {"submit_navigation": "PASS — /listings?q=ocean"},
+  "test_report_links": [],
+  "action_items": ["(Optional) Improve input visibility at 1024px width — currently squeezed to ~43px"],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Hero search form overflow bug verified fixed. Only minor UX note at 1024px where input width shrinks; not a regression."
+}

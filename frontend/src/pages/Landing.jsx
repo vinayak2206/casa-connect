@@ -53,23 +53,23 @@ export default function Landing() {
               <form
                 onSubmit={handleSearch}
                 data-testid="hero-search-form"
-                className="mt-10 bg-white border border-stone-200 p-2 flex flex-col sm:flex-row gap-2"
+                className="mt-10 bg-white border border-stone-200 p-2 flex flex-col sm:flex-row gap-2 w-full max-w-full overflow-hidden"
               >
-                <div className="flex-1 flex items-center gap-3 px-3">
-                  <Search className="w-4 h-4 text-stone-400" strokeWidth={1.5} />
+                <div className="flex-1 min-w-0 flex items-center gap-2 px-3">
+                  <Search className="w-4 h-4 text-stone-400 shrink-0" strokeWidth={1.5} />
                   <input
                     data-testid="hero-search-input"
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
-                    placeholder="Search city, neighborhood, address…"
-                    className="flex-1 py-3 text-sm bg-transparent focus:outline-none placeholder:text-stone-400"
+                    placeholder="Search city, neighborhood…"
+                    className="w-full min-w-0 py-3 text-sm bg-transparent focus:outline-none placeholder:text-stone-400"
                   />
                 </div>
                 <select
                   data-testid="hero-city-select"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="px-3 py-3 text-sm bg-stone-50 border-l border-stone-100 focus:outline-none"
+                  className="shrink-0 px-3 py-3 text-sm bg-stone-50 sm:border-l border-stone-100 focus:outline-none max-w-[140px]"
                 >
                   <option value="">All cities</option>
                   {cities.map((c) => (
@@ -79,7 +79,7 @@ export default function Landing() {
                 <button
                   type="submit"
                   data-testid="hero-search-btn"
-                  className="bg-[#2C3D30] text-white px-6 py-3 text-sm font-medium tracking-wide hover:bg-[#3A4F3E] transition inline-flex items-center gap-2"
+                  className="shrink-0 bg-[#2C3D30] text-white px-5 py-3 text-sm font-medium tracking-wide hover:bg-[#3A4F3E] transition inline-flex items-center justify-center gap-2 whitespace-nowrap"
                 >
                   Explore <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
                 </button>
