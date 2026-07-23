@@ -44,7 +44,7 @@ export default function Auth() {
       {/* Left visual */}
       <div className="hidden lg:block lg:col-span-6 relative overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80"
+          src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1400"
           alt="Modern interior"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -200,9 +200,7 @@ export default function Auth() {
           </div>
 
           <div className="mt-10 pt-6 border-t border-stone-200 text-xs text-stone-500">
-            <div className="uppercase tracking-widest mb-2">Demo credentials</div>
-            <div>Admin: <span className="text-[#1E1E1E]">admin@casaconnect.com / Admin@123</span></div>
-            <div>User: <span className="text-[#1E1E1E]">user@casaconnect.com / User@123</span></div>
+            By continuing you agree to our terms and privacy policy.
           </div>
         </motion.div>
       </div>

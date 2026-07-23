@@ -101,7 +101,7 @@ export default function Landing() {
           >
             <div className="relative aspect-[4/5] lg:aspect-[5/6] overflow-hidden grain">
               <img
-                src="https://images.unsplash.com/photo-1544984243-ec57ea16fe25?crop=entropy&cs=srgb&fm=jpg&q=90&w=1600"
+                src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 alt="Modern luxury house at golden hour"
                 className="w-full h-full object-cover"
               />
@@ -166,7 +166,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6">
             <img
-              src="https://images.unsplash.com/photo-1724582586529-62622e50c0b3?crop=entropy&cs=srgb&fm=jpg&q=85&w=1400"
+              src="https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1400"
               alt="Minimalist luxury living room"
               className="w-full aspect-[4/5] object-cover"
             />

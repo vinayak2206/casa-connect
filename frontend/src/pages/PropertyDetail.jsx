@@ -97,44 +97,51 @@ export default function PropertyDetail() {
           <ArrowLeft className="w-4 h-4" strokeWidth={1.5} /> All listings
         </Link>
 
-        {/* Gallery */}
+        {/* Gallery — 2x2 grid, all 4 images visible */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4"
+          className="grid grid-cols-2 gap-3 md:gap-4"
         >
-          <div className="md:col-span-8 relative aspect-[4/3] overflow-hidden bg-stone-200 grain">
-            <img
-              src={property.images?.[activeImg] || property.images?.[0]}
-              alt={property.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-4 left-4 flex gap-2">
-              {property.featured && (
-                <span className="bg-[#C86A53] text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium">
-                  Featured
-                </span>
+          {(property.images || []).slice(0, 4).map((img, idx) => (
+            <button
+              key={idx}
+              data-testid={`gallery-thumb-${idx}`}
+              onClick={() => setActiveImg(idx)}
+              className={`relative aspect-[4/3] overflow-hidden bg-stone-100 group ${
+                activeImg === idx ? "ring-2 ring-[#2C3D30] ring-offset-2 ring-offset-[#F7F5F0]" : ""
+              }`}
+            >
+              <img
+                src={img}
+                alt={`${property.title} — view ${idx + 1}`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1600";
+                }}
+              />
+              {idx === 0 && (
+                <div className="absolute top-3 left-3 flex gap-2">
+                  {property.featured && (
+                    <span className="bg-[#C86A53] text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium">
+                      Featured
+                    </span>
+                  )}
+                  <span className="bg-white/95 text-[#1E1E1E] text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium">
+                    {property.listing_type === "rent" ? "For Rent" : "For Sale"}
+                  </span>
+                </div>
               )}
-              <span className="bg-white/95 text-[#1E1E1E] text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-medium">
-                {property.listing_type === "rent" ? "For Rent" : "For Sale"}
-              </span>
+            </button>
+          ))}
+          {/* Fill placeholders if fewer than 4 images */}
+          {Array.from({ length: Math.max(0, 4 - (property.images?.length || 0)) }).map((_, i) => (
+            <div key={`ph-${i}`} className="relative aspect-[4/3] overflow-hidden bg-stone-100 flex items-center justify-center">
+              <span className="font-serif italic text-stone-300 text-lg">no image</span>
             </div>
-          </div>
-          <div className="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
-            {(property.images || []).slice(0, 3).map((img, idx) => (
-              <button
-                key={idx}
-                data-testid={`gallery-thumb-${idx}`}
-                onClick={() => setActiveImg(idx)}
-                className={`relative aspect-[4/3] overflow-hidden ${
-                  activeImg === idx ? "ring-2 ring-[#2C3D30]" : ""
-                }`}
-              >
-                <img src={img} alt={`view ${idx + 1}`} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
+          ))}
         </motion.div>
 
         {/* Content */}

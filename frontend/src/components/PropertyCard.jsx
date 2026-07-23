@@ -16,10 +16,14 @@ export default function PropertyCard({ property, onToggleFavorite, isFavorite = 
       <Link to={`/property/${property.id}`} className="block">
         <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
           <img
-            src={property.images?.[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"}
+            src={property.images?.[0] || "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200"}
             alt={property.title}
-            className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src =
+                "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200";
+            }}
           />
           <div className="absolute top-4 left-4 flex gap-2">
             {property.featured && (
