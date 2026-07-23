@@ -56,12 +56,12 @@ export default function Landing() {
                 className="mt-10 bg-white border border-stone-200 p-2 flex flex-col sm:flex-row gap-2 w-full max-w-full overflow-hidden"
               >
                 <div className="flex-1 min-w-0 flex items-center gap-2 px-3">
-                  <Search className="w-4 h-4 text-stone-400 shrink-0" strokeWidth={1.5} />
+                  <Search className="hidden md:block w-4 h-4 text-stone-400 shrink-0" strokeWidth={1.5} />
                   <input
                     data-testid="hero-search-input"
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
-                    placeholder="Search city, neighborhood…"
+                    placeholder="Search city or area…"
                     className="w-full min-w-0 py-3 text-sm bg-transparent focus:outline-none placeholder:text-stone-400"
                   />
                 </div>
@@ -69,7 +69,7 @@ export default function Landing() {
                   data-testid="hero-city-select"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="shrink-0 px-3 py-3 text-sm bg-stone-50 sm:border-l border-stone-100 focus:outline-none max-w-[140px]"
+                  className="shrink-0 px-2 py-3 text-sm bg-stone-50 sm:border-l border-stone-100 focus:outline-none max-w-[110px]"
                 >
                   <option value="">All cities</option>
                   {cities.map((c) => (
