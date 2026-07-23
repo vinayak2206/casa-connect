@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bed, Bath, Square, MapPin, Heart } from "lucide-react";
+import { Bed, Bath, Square, MapPin, Heart, GitCompare } from "lucide-react";
 import { formatPrice } from "@/lib/api";
+import { useCompare } from "@/context/CompareContext";
 
 export default function PropertyCard({ property, onToggleFavorite, isFavorite = false, index = 0 }) {
+  const { has, toggle } = useCompare();
+  const inCompare = has(property.id);
   return (
     <motion.article
       data-testid={`property-card-${property.id}`}
@@ -53,6 +56,22 @@ export default function PropertyCard({ property, onToggleFavorite, isFavorite = 
               <Heart className="w-4 h-4" fill={isFavorite ? "currentColor" : "none"} strokeWidth={1.5} />
             </button>
           )}
+          <button
+            data-testid={`compare-btn-${property.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggle(property);
+            }}
+            className={`absolute ${onToggleFavorite ? "top-16" : "top-4"} right-4 w-10 h-10 flex items-center justify-center transition-all backdrop-blur-md ${
+              inCompare
+                ? "bg-[#2C3D30] text-white"
+                : "bg-white/85 text-stone-700 hover:bg-white"
+            }`}
+            aria-label="Toggle compare"
+          >
+            <GitCompare className="w-4 h-4" strokeWidth={1.5} />
+          </button>
         </div>
       </Link>
 

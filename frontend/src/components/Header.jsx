@@ -8,6 +8,7 @@ const navLinks = [
   { to: "/", label: "Home" },
   { to: "/listings", label: "Listings" },
   { to: "/listings?listing_type=rent", label: "Rentals" },
+  { to: "/compare", label: "Compare" },
 ];
 
 export default function Header() {

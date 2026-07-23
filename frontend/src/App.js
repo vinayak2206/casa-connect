@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
+import { CompareProvider } from "@/context/CompareContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CompareBar from "@/components/CompareBar";
+import ScrollToTop from "@/components/ScrollToTop";
 import Landing from "@/pages/Landing";
 import Listings from "@/pages/Listings";
 import PropertyDetail from "@/pages/PropertyDetail";
@@ -11,7 +14,7 @@ import Auth from "@/pages/Auth";
 import AdminDashboard from "@/pages/AdminDashboard";
 import UserDashboard from "@/pages/UserDashboard";
 import PropertyForm from "@/pages/PropertyForm";
-import ScrollToTop from "@/components/ScrollToTop";
+import Compare from "@/pages/Compare";
 import "@/App.css";
 
 function Shell() {
@@ -26,6 +29,7 @@ function Shell() {
           <Route path="/" element={<Landing />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/property/:id" element={<PropertyDetail />} />
+          <Route path="/compare" element={<Compare />} />
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/dashboard"
@@ -42,6 +46,7 @@ function Shell() {
         </Routes>
       </main>
       {!hideChrome && <Footer />}
+      {!hideChrome && <CompareBar />}
       <Toaster
         position="bottom-right"
         toastOptions={{
@@ -61,7 +66,9 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Shell />
+        <CompareProvider>
+          <Shell />
+        </CompareProvider>
       </AuthProvider>
     </BrowserRouter>
   );

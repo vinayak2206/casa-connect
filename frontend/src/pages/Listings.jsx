@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, LayoutGrid, Map as MapIcon } from "lucide-react";
 import { api } from "@/lib/api";
 import PropertyCard from "@/components/PropertyCard";
+import MapView from "@/components/MapView";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
 
@@ -16,6 +17,7 @@ export default function Listings() {
   const [favIds, setFavIds] = useState(new Set());
   const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [view, setView] = useState(params.get("view") === "map" ? "map" : "grid");
 
   const filters = useMemo(
     () => ({
@@ -90,9 +92,36 @@ export default function Listings() {
               Browse listings
             </h1>
           </div>
-          <div className="text-sm text-stone-500">
-            <span className="font-serif text-3xl text-[#1E1E1E]">{properties.length}</span>{" "}
-            <span className="uppercase tracking-[0.2em] text-[11px] ml-1">homes</span>
+          <div className="flex items-center gap-6">
+            {/* View toggle */}
+            <div className="relative flex bg-stone-100 p-1" data-testid="view-toggle">
+              {[
+                { v: "grid", label: "Grid", icon: <LayoutGrid className="w-3.5 h-3.5" strokeWidth={1.5} /> },
+                { v: "map", label: "Map", icon: <MapIcon className="w-3.5 h-3.5" strokeWidth={1.5} /> },
+              ].map((opt) => (
+                <button
+                  key={opt.v}
+                  data-testid={`view-${opt.v}`}
+                  onClick={() => setView(opt.v)}
+                  className="relative z-10 inline-flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-widest transition-colors"
+                >
+                  {view === opt.v && (
+                    <motion.div
+                      layoutId="view-pill"
+                      className="absolute inset-0 bg-white shadow-sm z-0"
+                      transition={{ type: "spring", stiffness: 500, damping: 34 }}
+                    />
+                  )}
+                  <span className={`relative z-10 flex items-center gap-2 ${view === opt.v ? "text-[#1E1E1E]" : "text-stone-500"}`}>
+                    {opt.icon} {opt.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="text-sm text-stone-500">
+              <span className="font-serif text-3xl text-[#1E1E1E]">{properties.length}</span>{" "}
+              <span className="uppercase tracking-[0.2em] text-[11px] ml-1">homes</span>
+            </div>
           </div>
         </div>
 
@@ -233,7 +262,7 @@ export default function Listings() {
             </div>
           </aside>
 
-          {/* Grid */}
+          {/* Grid / Map */}
           <div className="lg:col-span-9">
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -253,6 +282,8 @@ export default function Listings() {
                   Clear filters
                 </button>
               </div>
+            ) : view === "map" ? (
+              <MapView properties={properties} />
             ) : (
               <motion.div
                 initial="hidden"

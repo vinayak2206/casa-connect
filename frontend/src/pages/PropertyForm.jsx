@@ -16,6 +16,8 @@ const emptyForm = {
   area: 0,
   city: "",
   address: "",
+  lat: "",
+  lng: "",
   images: [],
   amenities: [],
   featured: false,
@@ -69,6 +71,8 @@ export default function PropertyForm() {
         bedrooms: Number(form.bedrooms),
         bathrooms: Number(form.bathrooms),
         area: Number(form.area),
+        lat: form.lat === "" ? null : Number(form.lat),
+        lng: form.lng === "" ? null : Number(form.lng),
       };
       if (isEdit) {
         await api.put(`/properties/${id}`, payload);
@@ -137,6 +141,12 @@ export default function PropertyForm() {
                   <option value="pending">Pending</option>
                   <option value="sold">Sold</option>
                 </select>
+              </Field>
+              <Field label="Latitude (optional, for map)">
+                <input type="number" step="any" data-testid="pf-lat" value={form.lat} onChange={(e) => update("lat", e.target.value)} placeholder="e.g. 34.0259" className={inputCls} />
+              </Field>
+              <Field label="Longitude (optional, for map)">
+                <input type="number" step="any" data-testid="pf-lng" value={form.lng} onChange={(e) => update("lng", e.target.value)} placeholder="e.g. -118.7798" className={inputCls} />
               </Field>
             </div>
 

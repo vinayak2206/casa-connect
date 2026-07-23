@@ -71,6 +71,8 @@ def to_public_property(p: dict) -> dict:
         "area": p.get("area", 0),
         "city": p.get("city"),
         "address": p.get("address"),
+        "lat": p.get("lat"),
+        "lng": p.get("lng"),
         "images": p.get("images", []),
         "amenities": p.get("amenities", []),
         "featured": p.get("featured", False),
@@ -101,6 +103,8 @@ class PropertyIn(BaseModel):
     area: float = 0
     city: str
     address: str
+    lat: Optional[float] = None
+    lng: Optional[float] = None
     images: List[str] = []
     amenities: List[str] = []
     featured: bool = False
@@ -402,6 +406,19 @@ logger = logging.getLogger(__name__)
 _PEXELS = "https://images.pexels.com/photos"
 _UNSPLASH = "https://images.unsplash.com"
 
+_CITY_COORDS = {
+    "Malibu": (34.0259, -118.7798),
+    "San Francisco": (37.7749, -122.4194),
+    "New York": (40.7128, -74.0060),
+    "Napa": (38.2975, -122.2869),
+    "Miami": (25.7617, -80.1918),
+    "Aspen": (39.1911, -106.8175),
+    "Portland": (45.5152, -122.6784),
+    "Santa Fe": (35.6870, -105.9378),
+    "Austin": (30.2672, -97.7431),
+    "Newport": (41.4901, -71.3128),
+}
+
 SEED_PROPERTIES = [
     {
         "title": "Villa Serena — Cliffside Estate",
@@ -602,7 +619,14 @@ async def seed_admin_and_data():
         admin_doc = await db.users.find_one({"email": admin_email})
         created_by = str(admin_doc["_id"]) if admin_doc else None
         for p in SEED_PROPERTIES:
-            doc = {**p, "created_by": created_by, "created_at": datetime.now(timezone.utc)}
+            coords = _CITY_COORDS.get(p.get("city"), (None, None))
+            doc = {
+                **p,
+                "lat": coords[0],
+                "lng": coords[1],
+                "created_by": created_by,
+                "created_at": datetime.now(timezone.utc),
+            }
             await db.properties.insert_one(doc)
         logger.info(f"Seeded {len(SEED_PROPERTIES)} properties")
 
