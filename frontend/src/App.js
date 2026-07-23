@@ -1,55 +1,77 @@
-import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Toaster } from "sonner";
+import { AnimatePresence, motion } from "framer-motion";
+import { AuthProvider } from "@/context/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Landing from "@/pages/Landing";
+import Listings from "@/pages/Listings";
+import PropertyDetail from "@/pages/PropertyDetail";
+import Auth from "@/pages/Auth";
+import AdminDashboard from "@/pages/AdminDashboard";
+import UserDashboard from "@/pages/UserDashboard";
+import PropertyForm from "@/pages/PropertyForm";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+function Shell() {
+  const location = useLocation();
+  const hideChrome = location.pathname === "/auth";
   return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0]">
+      {!hideChrome && <Header />}
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-1"
         >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Landing />} />
+            <Route path="/listings" element={<Listings />} />
+            <Route path="/property/:id" element={<PropertyDetail />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route
+              path="/dashboard"
+              element={<ProtectedRoute><UserDashboard /></ProtectedRoute>}
+            />
+            <Route
+              path="/admin"
+              element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>}
+            />
+            <Route
+              path="/admin/property/:id"
+              element={<ProtectedRoute adminOnly><PropertyForm /></ProtectedRoute>}
+            />
+          </Routes>
+        </motion.main>
+      </AnimatePresence>
+      {!hideChrome && <Footer />}
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            fontFamily: '"Outfit", sans-serif',
+            border: "1px solid #e7e5e4",
+            background: "#ffffff",
+            color: "#1e1e1e",
+          },
+        }}
+      />
     </div>
   );
-};
+}
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Shell />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
