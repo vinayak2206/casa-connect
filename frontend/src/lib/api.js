@@ -37,3 +37,6 @@ export function formatPrice(price, listingType = "sale") {
   });
   return listingType === "rent" ? `${formatted}/mo` : formatted;
 }
+
+console.log("REACT_APP_BACKEND_URL =", process.env.REACT_APP_BACKEND_URL);
+console.log("API =", API);
